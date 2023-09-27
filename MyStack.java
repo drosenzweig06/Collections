@@ -9,6 +9,7 @@ public class MyStack<E>
     // instance variables - replace the example below with your own
     private int size;
     private E[] stack;
+    
     /**
      * Constructor for objects of class Stacks
      */
@@ -16,6 +17,10 @@ public class MyStack<E>
         size = 0;
         stack = (E[])new Object[5];
     }
+    
+    /**
+     * Adds an element to the stack
+     */
     public void push(E element) throws IndexOutOfBoundsException {
         if(isFull() == false){
             stack[size] = element;
@@ -25,6 +30,11 @@ public class MyStack<E>
            throw new IndexOutOfBoundsException();
         }
     }
+    
+    /**
+     * Pops the element on the top off the stack and throws an IndexOutOfBoundsError
+     * if the stack is empty
+     */
     public E pop() {
         if(isEmpty() == false){
             size--;
@@ -34,15 +44,31 @@ public class MyStack<E>
             return stack[-1];
         }
     }
+    
+    /**
+     * Checks if the stack is empty
+     */
     public boolean isEmpty() {
         return size == 0;
     }
+    
+    /**
+     * Returns the top value
+     */
     public E top() {
          return stack[size - 1];
     }
+    
+    /**
+     * Returns the size of the array
+     */
     public int size() {
         return size;
     }
+    
+    /**
+     * Checks if the array is full
+     */
     public boolean isFull() {
         boolean isFull = false;
         if((size - 1) >= stack.length - 1)
@@ -51,6 +77,10 @@ public class MyStack<E>
         }
         return isFull;
     }
+    
+    /**
+     * Returns the stack
+     */
     public String toString() {
         String array = "";
         for(int i = 0; i < size; i++){
