@@ -4,69 +4,63 @@
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Queue
+public class MyQueue<E>
 {
     // instance variables - replace the example below with your own
-    private int[] queue;
+    private E[] queue;
     private int front;
     private int size;
-    private int sizeofmemory;
-
+    private int back;
     /**
      * Constructor for objects of class Queue
      */
-    public Queue(int length)
-    {
-        sizeofmemory = length;
+    public MyQueue() {
         size = 0;
         front = 0;
-        queue = new int[sizeofmemory];
+        back = -1;
+        queue = (E[])new Object[5];
     }
-    public void enqueue(int element){
+    public void enqueue(E element) throws IndexOutOfBoundsException {
         if(isFull() == false){
-            queue[(size + front) % queue.length] = element;
+            back = (back + 1) % queue.length;
+            queue[back] = element;
             size++;
         }
         else{
-           System.out.println("Sorry your queue is full"); 
+           throw new IndexOutOfBoundsException();
         }
     }
-    public int dequeue(){
-        int num = 0;
+    public E dequeue() {
         if(isEmpty() == false){
-            front++;
+            front = (front + 1) % queue.length;
             size--;
-            num = queue[(front-1) % queue.length];
+            return queue[front];
         }
-        return num;
-    }
-    public boolean isEmpty(){
-        boolean isEmpty = false;
-        if(size == 0){
-            isEmpty = true;
+        else{
+            return queue[-1];
         }
-        return isEmpty;
     }
-    public int front(){
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    public E front() {
         return queue[front % queue.length];
     }
-    public int size(){
+    public int size() {
         return size;
     }
-    public boolean isFull(){
+    public boolean isFull() {
         if(size >= queue.length - 1){
             System.out.println(queue.length);
             return true;
         }
         return false;
     }
-    public String toString(){
+    public String toString() {
         String array = "";
         for(int i = 0; i < queue.length; i++)
         {
-            if(queue[i] != 0){
-                array += queue[i] + ",";
-            }
+            array += queue[i] + ",";
         }
         return array;
     }
