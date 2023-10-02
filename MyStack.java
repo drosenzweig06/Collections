@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
  * Write a description of class Stacks here.
  *
@@ -35,13 +37,13 @@ public class MyStack<E>
      * Pops the element on the top off the stack and throws an IndexOutOfBoundsError
      * if the stack is empty
      */
-    public E pop() {
+    public E pop() throws EmptyStackException{
         if(isEmpty() == false){
             size--;
             return stack[size];
         }
         else{
-            return stack[-1];
+            throw new EmptyStackException();
         }
     }
     
