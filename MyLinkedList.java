@@ -27,6 +27,7 @@ public class MyLinkedList <E>
      */
     public void addHead(E data) {
         Node newnode = new Node(data);
+        //Checks to see if the head node contains any data
         if(head == null) {
             head = newnode;              
         } else {
@@ -55,6 +56,8 @@ public class MyLinkedList <E>
 
     /**
      * Removes the current head and sets the next node to the head
+     * 
+     * Returns the element that was originally stored in the head
      */
     public E removeHead() throws IndexOutOfBoundsException {
         if(head == null) {
@@ -70,6 +73,8 @@ public class MyLinkedList <E>
 
     /**
      * Returns the data of the current head
+     * 
+     * 
      */
     public E getHead() throws NoSuchElementException {
         if(isEmpty()) {

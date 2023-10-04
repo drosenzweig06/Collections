@@ -2,8 +2,8 @@
 /**
  * Write a description of class TestLinkedList here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Daniel Rosenzweig
+ * @version 10/4/2023
  */
 public class TestLinkedList
 {
@@ -15,6 +15,7 @@ public class TestLinkedList
         newlist.size();
         newlist.addTail(4);
         newlist.addTail(6);
-        newlist.toString();
+        newlist.removeHead();
+        System.out.println(newlist.toString());
     }
 }
