@@ -3,17 +3,18 @@ import java.util.NoSuchElementException;
 /**
  * Write a description of class MyLinkedList here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Daniel Rosenzweig
+ * @version 10/3/2023
  */
-public class MyLinkedList
+public class MyLinkedList <E>
 {
-    // instance variables - replace the example below with your own
+    //instance variable that tracks the size/number of nodes
     private int size;
-    private Node head;
+    //instance variable that tracks the head of the node
+    private Node<E> head;
 
     /**
-     * Constructor for objects of class MyLinkedList
+     * Constructor class MyLinkedList; Sets size to 0 and head to null
      */
     public MyLinkedList()
     {
@@ -22,29 +23,26 @@ public class MyLinkedList
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Adds a new head and shifts the current head over
      */
-    public void addHead(int data) {
+    public void addHead(E data) {
         Node newnode = new Node(data);
         if(head == null) {
             head = newnode;              
-            size++;
-        }
-        else {
+        } else {
             newnode.setNext(head);
             head = newnode;
-            size++;
         }
+        size++;
     }
-    
-    public void addTail(int data) {
-        if(head == null){
+
+    /**
+     * Takes in an element and creates and adds a node to the end
+     */
+    public void addTail(E data) {
+        if(head == null) {
             addHead(data);
-        }
-        else {
+        } else {
             size++;
             Node newnode = new Node(data);
             Node current = head;
@@ -54,41 +52,56 @@ public class MyLinkedList
             current.setNext(newnode);
         }
     }
-    
-    public int removeHead() throws IndexOutOfBoundsException {
+
+    /**
+     * Removes the current head and sets the next node to the head
+     */
+    public E removeHead() throws IndexOutOfBoundsException {
         if(head == null) {
             throw new IndexOutOfBoundsException();
-        }
-        else {
-            Node temphead = head;
+        } else {
+            Node<E> temphead = head;
             head = head.getNext();
             temphead.setNext(null);
             size--;
             return temphead.getData();
         }
     }
-    
-    public int getHead() throws NoSuchElementException {
+
+    /**
+     * Returns the data of the current head
+     */
+    public E getHead() throws NoSuchElementException {
         if(isEmpty()) {
             throw new NoSuchElementException();
         }
         return head.getData();
     }
-    
+
+    /**
+     * Returns whether the head is empty or not
+     */
     public boolean isEmpty() {
         return head == null;
     }
-    
+
+    /**
+     * Returns the size
+     */
     public int size() {
         return size;
     }
-    
+
+    /**
+     * Returns the data of the current nodes
+     */
     public String toString() {
-            Node current = head;
-            String list = "";
-            while(current.getNext() != null) {
-                list += current.getData() + " ,";
-            }
-            return list;
+        Node current = head;
+        String list = "";
+        while(current.getNext() != null) {
+            list += current.getData() + " ,";
+            current = current.getNext();
+        }
+        return list;
     }
 }

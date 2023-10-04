@@ -5,43 +5,49 @@
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Node
+public class Node<E>
 {
     // instance variables - replace the example below with your own
-    private int data;
-    private Node next;
+    private E data;
+    private Node<E> next;
 
     /**
-     * Constructor for objects of class Node
+     * Constructor for objects of class Node; Takes data inputed by the user
      */
-    public Node(int data)
+    public Node(E data)
     {
         this.data = data;
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Returns data of node
      */
-    public int getData()
+    public E getData()
     {
         return data;
     }
-    
-    public Node getNext()
+
+    /**
+     * returns the next node
+     */
+    public Node<E> getNext()
     {
         return next;
     }
-    
-    public void setNext(Node a)
+
+    /**
+     * Sets the next node to the inputed element
+     */
+    public void setNext(Node<E> node)
     {
-        next = a;
+        next = node;
     }
-    
-    public void setData(int a)
+
+    /**
+     * Sets the data of the node to the inputed element
+     */
+    public void setData(E element)
     {
-        data = a;
+        data = element;
     }
 }

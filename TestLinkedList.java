@@ -15,6 +15,6 @@ public class TestLinkedList
         newlist.size();
         newlist.addTail(4);
         newlist.addTail(6);
-        newlist.remove
+        newlist.toString();
     }
 }
