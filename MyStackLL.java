@@ -11,10 +11,7 @@ public class MyStackLL<E>
     // instance variables - replace the example below with your own
     private int size;
     private Node<E> head;
-    {
-         char openChars = "{" || "(" || "[";
-        
-    }
+    
     /**
      * Constructor for objects of class Stacks
      */
@@ -87,6 +84,23 @@ public class MyStackLL<E>
      */
     public boolean isFull() {
         return false;
+    }
+    
+    public boolean openChars(String open) {
+        String openchar = "{[(";
+        String closechar = "}])";
+        for(int i = 0; i < open.length(); i++) {
+            if(openchar.indexOf(open.substring(i,i+1)) != -1) {
+                return true;
+            } else if(openchar.indexOf(open.substring(i,i+1)) == closechar.
+            indexOf(open.substring(i,i+1))) {
+                pop();
+                return false;
+            } else {
+                return false;
+            }
+            }
+        }
     }
     
     /**
