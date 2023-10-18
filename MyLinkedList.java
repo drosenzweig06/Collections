@@ -10,9 +10,10 @@ public class MyLinkedList <E>
 {
     //instance variable that tracks the size/number of nodes
     private int size;
-    //instance variable that tracks the head of the node
+    //instance variable that tracks the head of the list
     private Node<E> head;
-
+    //instance variable that tracks the tail of the list
+    private Node<E> tail;
     /**
      * Constructor class MyLinkedList; Sets size to 0 and head to null
      */
@@ -21,7 +22,51 @@ public class MyLinkedList <E>
         head = null;
         size = 0;
     }
-
+    
+    /**
+     * Method get
+     *
+     * @param index A parameter
+     * @return The return value
+     */
+    public E get(int index) throws NoSuchElementException {
+        Node <E> current = head;
+        
+        if(size <= index) {
+            throw new NoSuchElementException();
+        } else {
+            for(int i = 0; i < index - 1;i++) {
+                current = current.getNext();
+            }
+        }
+        return current;
+    }
+    
+    public E remove(int index) throws NoSuchElementException {
+        Node <E> current = head;
+    
+        if(size <= index) {
+            throw new NoSuchElementException();
+        } else {
+            for(int i = 0; i < index - 1;i++) {
+                current = current.getNext();
+            }
+        }
+    }
+    
+    public void add(int index, E element) {
+        Node <E> current = head;
+        current.setData(element);
+    
+        if(size <= index) {
+            throw new NoSuchElementException();
+        } else {
+            for(int i = 0; i < index - 1;i++) {
+                current = current.getNext();
+            }
+        }
+    }
+    
     /**
      * Adds a new head and shifts the current head over
      */
