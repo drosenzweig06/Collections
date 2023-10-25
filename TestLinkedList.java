@@ -16,6 +16,10 @@ public class TestLinkedList
         newlist.addTail(4);
         newlist.addTail(6);
         newlist.removeHead();
-        System.out.println(newlist.toString());
+        System.out.println(newlist.get(1));
+        newlist.set(1,8);
+        System.out.println(newlist.get(1));
+        newlist.remove(1);
+        newlist.add(1,50);
     }
 }
