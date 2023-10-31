@@ -1,10 +1,10 @@
 import java.util.NoSuchElementException;
 
 /**
- * Write a description of class MyLinkedList here.
+ * Linked List
  *
  * @author Daniel Rosenzweig
- * @version 10/3/2023
+ * @version 10/31/2023
  */
 public class MyLinkedList <E extends Comparable<E>>
 {
@@ -24,10 +24,7 @@ public class MyLinkedList <E extends Comparable<E>>
     }
     
     /**
-     * Method get
-     *
-     * @param index A parameter
-     * @return The return value
+     * Returns element at specified index.
      */
     public E get(int index) throws NoSuchElementException {
         Node <E> current = head;
@@ -42,9 +39,12 @@ public class MyLinkedList <E extends Comparable<E>>
         return current.getData();
     }
     
+    /**
+     * Removes and returns element at specified index.
+     */
     public E remove(int index) throws NoSuchElementException {
         Node <E> current = head;
-    
+        
         if(size <= index || index < 0) {
             throw new NoSuchElementException();
         } else if(index == 0) {
@@ -66,34 +66,48 @@ public class MyLinkedList <E extends Comparable<E>>
         }
     }
     
+    /**
+     * Inserts element at specified index.
+     */
     public void add(int index, E element) throws NoSuchElementException {
         Node <E> current = head;
         if(size < index||index < 0) {
             throw new NoSuchElementException();
-        } else if(index == 0) {
-            addHead(element);
         } else {
+            Node <E> newnode = new Node(element);
+            Node <E> next = current.getNext();
             for(int i = 0; i < index - 1;i++) {
                 current = current.getNext();
             }
+            if(index == 0) {
+                addHead(element);
+            } else if(size == index) {
+                addTail(element);
+            } else {
+                newnode.setNext(next);
+                current.setNext(newnode);
+                size++;
+            }
         }
-        Node <E> next = current.getNext();
-        Node <E> newnode = new Node(element);
-        current.setNext(newnode);
-        newnode.setNext(next);
-        size++;
     }
     
+    /**
+     * Adds element to end of list.
+     */
     public void add(E element) {
         addTail(element);
         size++;
     }
     
-    public void set(int index, E element) {
+    /**
+     * Replaces existing element at specified index.
+     */
+    public void set(int index, E element) throws NoSuchElementException{
         Node <E> current = head;
-        if(size <= index) {
+        if(size <= index || index < 0) {
             throw new NoSuchElementException();
         } else if(index == 0) {
+            removeHead();
             addHead(element);
         } else {
             for(int i = 0; i < index;i++) {
@@ -103,8 +117,34 @@ public class MyLinkedList <E extends Comparable<E>>
         current.setData(element);
     }
     
+    /**
+     * Inserts element into list.
+     */
     public void insertSorted(E element) {
         Node <E> current = head;
+        int index = 0;
+        while(current != null && current.getData().compareTo(element) < 0) {
+            current = current.getNext();
+            index++;
+        }
+        add(index, element);
+    }
+    
+    /**
+     * Removes and returns first occurrence of matching element.
+     */
+    public E remove(E element) {
+        Node<E> current = head;
+        int index = 0;
+        
+        while(current != null && current.getData().compareTo(element) != 0) {
+            current = current.getNext();
+            index++;
+        }
+        if(current == null) {
+            return null;
+        }
+        return remove(index);
     }
 
     /**
@@ -188,8 +228,13 @@ public class MyLinkedList <E extends Comparable<E>>
     public String toString() {
         Node current = head;
         String list = "";
-        while(current.getNext() != null) {
-            list += current.getData() + " ,";
+        if(isEmpty()) {
+            return list;
+        }
+        list = list + current.getData();
+        current = current.getNext();
+        while(current != null) {
+            list = list + "," + current.getData();
             current = current.getNext();
         }
         return list;

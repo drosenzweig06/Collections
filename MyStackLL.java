@@ -100,8 +100,8 @@ public class MyStackLL<E>
                 return false;
             }
             }
+        return false;
         }
-    }
     
     /**
      * Returns the stack
