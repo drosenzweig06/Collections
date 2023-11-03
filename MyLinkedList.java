@@ -48,7 +48,6 @@ public class MyLinkedList <E extends Comparable<E>>
         if(size <= index || index < 0) {
             throw new NoSuchElementException();
         } else if(index == 0) {
-            size--;
             return removeHead();
         } else {
             for(int i = 0; i < index - 1;i++) {
@@ -74,20 +73,19 @@ public class MyLinkedList <E extends Comparable<E>>
         if(size < index||index < 0) {
             throw new NoSuchElementException();
         } else {
+            if(index == 0) {
+                addHead(element);
+            } else if(size == index) {
+                addTail(element);
+            } 
             Node <E> newnode = new Node(element);
             Node <E> next = current.getNext();
             for(int i = 0; i < index - 1;i++) {
                 current = current.getNext();
             }
-            if(index == 0) {
-                addHead(element);
-            } else if(size == index) {
-                addTail(element);
-            } else {
-                newnode.setNext(next);
-                current.setNext(newnode);
-                size++;
-            }
+            newnode.setNext(next);
+            current.setNext(newnode);
+            size++;
         }
     }
     
@@ -96,7 +94,6 @@ public class MyLinkedList <E extends Comparable<E>>
      */
     public void add(E element) {
         addTail(element);
-        size++;
     }
     
     /**

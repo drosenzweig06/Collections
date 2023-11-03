@@ -24,6 +24,7 @@ public class Castaway implements Comparable<Castaway>
     /**
      * Compares last names first and first names second
      */
+    @Override
     public int compareTo(Castaway other) {
         if(lastName.equals(other.lastName)) {
             return firstName.compareTo(other.firstName);
