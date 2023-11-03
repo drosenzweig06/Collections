@@ -2,8 +2,8 @@
 /**
  * Write a description of class Castaway here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * Daniel Rosenzweig
+ * 11/2/23
  */
 public class Castaway implements Comparable<Castaway>
 {
@@ -22,7 +22,7 @@ public class Castaway implements Comparable<Castaway>
     }
 
     /**
-     * 
+     * Compares last names first and first names second
      */
     public int compareTo(Castaway other) {
         if(lastName.equals(other.lastName)) {
@@ -32,16 +32,14 @@ public class Castaway implements Comparable<Castaway>
         }
     }
     
+    /**
+     * Returns a boolean on whether or not the names are equal
+     */
     public boolean equals(Castaway other) {
-        if(compareTo(other) == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return compareTo(other) == 0;
     }
     
     public String toString() {
-        String list = firstName + "," + lastName;
-        return list;
+       return firstName + "," + lastName;
     }
 }

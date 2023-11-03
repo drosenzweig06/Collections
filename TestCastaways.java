@@ -1,9 +1,9 @@
 
 /**
- * Write a description of class TestCastaways here.
+ * Test class
  *
- * @author (your name)
- * @version (a version number or a date)
+ * Daniel Rosenzweig
+ * 11/2/23
  */
 public class TestCastaways
 {
@@ -22,8 +22,8 @@ public class TestCastaways
             list.insertSorted(new Castaway(lastName[i],firstName[i],
                                     score[i], gender[i]));
         }
-        System.out.print(list.remove(new Castaway("Howell", "Thurston",
-                                                    82,"M")));
-        
+        System.out.print(list.remove(new Castaway(lastName[3],firstName[3],
+                                    score[3], gender[3])));
+        System.out.println(list.toString());
     }
 }
