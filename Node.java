@@ -10,6 +10,7 @@ public class Node<E>
     // instance variables - replace the example below with your own
     private E data;
     private Node<E> next;
+    private Node<E> prev;
 
     /**
      * Constructor for objects of class Node; Takes data inputed by the user
@@ -34,7 +35,17 @@ public class Node<E>
     {
         return next;
     }
-
+    
+    /**
+     * Method getPrev
+     *
+     * @return The return value
+     */
+    public Node<E> getPrev()
+    {
+        return prev;
+    }
+    
     /**
      * Sets the next node to the inputed element
      */
@@ -42,7 +53,17 @@ public class Node<E>
     {
         next = node;
     }
-
+    
+    /**
+     * Method setPrev
+     *
+     * @param node A parameter
+     */
+    public void setPrev(Node<E> node)
+    {
+        prev = node;
+    }
+    
     /**
      * Sets the data of the node to the inputed element
      */
