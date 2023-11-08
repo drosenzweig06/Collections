@@ -179,16 +179,16 @@ public class MyLinkedList <E extends Comparable<E>>
      * Takes in an element and creates and adds a node to the end
      */
     public void addTail(E data) {
-        if(head == null) {
-            addHead(data);
+        size++;
+        Node newnode = new Node(data);
+        
+        if(!isEmpty()) {
+            tail.setNext(newnode);
+            newnode.setPrev(tail);
+            tail = newnode;
         } else {
-            size++;
-            Node newnode = new Node(data);
-            Node current = head;
-            while(current.getNext() != null) {
-                current = current.getNext();
-            }
-            current.setNext(newnode);
+            tail = newnode;
+            head = tail;
         }
     }
 
