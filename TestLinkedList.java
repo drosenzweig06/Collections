@@ -21,5 +21,6 @@ public class TestLinkedList
         System.out.println(newlist.get(1));
         newlist.remove(1);
         newlist.add(1,50);
+        newlist.add(99);
     }
 }
