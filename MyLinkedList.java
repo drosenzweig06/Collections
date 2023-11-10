@@ -23,8 +23,15 @@ public class MyLinkedList <E extends Comparable<E>>
         size = 0;
     }
     
-    public Node getNode(int index) {
-        if(index < (int)size/2) {
+    /**
+     * Method getNode
+     * Uses double linked list to find the quickest way to get to the desired
+     * node
+     * @param index of the node
+     * @return returns the node at that index
+     */
+    public Node<E> getNode(int index) {
+        if(index <= (int)size/2) {
             Node <E> current = head;
             for(int i = 0; i < index; i++) {
                 current = current.getNext();
@@ -38,11 +45,13 @@ public class MyLinkedList <E extends Comparable<E>>
             return current;
         }
     }
+    
     /**
      * Returns element at specified index.
+     * Throws NoSuchElementException if the index does not exist
      */
     public E get(int index) throws NoSuchElementException {
-        if(size <= index) {
+        if(index < 0 || size <= index) {
             throw new NoSuchElementException();
         } else {
             return getNode(index).getData();
@@ -74,17 +83,21 @@ public class MyLinkedList <E extends Comparable<E>>
         } else if(index == 0) {
             return removeHead();
         } else {
-            Node <E> current = getNode(index);
-            Node <E> toRemove = current.getNext();
+            Node <E> toRemove = getNode(index);
             
             if(toRemove.getNext() == null) { // if removing tail
-                tail = current;
+                tail = toRemove.getPrev();
+                tail.setNext(null);
+            } else {
+                toRemove.getPrev().setNext(toRemove.getNext());
+                toRemove.getNext().setPrev(toRemove.getPrev());
             }
-            Node <E> temp = toRemove;
-            current.setNext(temp.getNext());
+            E tempData = toRemove.getData();
+            toRemove.setNext(null);
+            toRemove.setPrev(null);
             toRemove.setData(null);
             size--;
-            return temp.getData();
+            return tempData;
         }
     }
     
@@ -133,19 +146,8 @@ public class MyLinkedList <E extends Comparable<E>>
             removeHead();
             addHead(element);
         } else {
-            Node <E> current = getNode(index)
-            Node <E> newnode = new Node<E>(element);
-            Node<E> nextnode = current.getNext();
-            
-            if(index == size - 1) {
-                tail = newnode;
-            } else {
-                newnode.setNext(nextnode.getNext());
-            }
-            
-            current.setNext(newnode);
-            nextnode.setData(null);
-            nextnode.setNext(null);
+            Node<E> current = getNode(index);
+            current.setData(element);
         }
     }
     

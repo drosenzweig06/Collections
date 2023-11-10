@@ -10,6 +10,7 @@ public class TestLinkedList
     public static void test()
     {
         MyLinkedList newlist = new MyLinkedList();
+        newlist.addTail(9);
         newlist.addHead(2);
         newlist.addHead(3);
         newlist.size();
@@ -20,6 +21,7 @@ public class TestLinkedList
         newlist.set(1,8);
         System.out.println(newlist.get(1));
         newlist.remove(1);
+        newlist.remove(2);
         newlist.add(1,50);
         newlist.add(99);
     }
