@@ -15,11 +15,12 @@ public class MyLinkedList <E extends Comparable<E>>
     //instance variable that tracks the tail of the list
     private Node<E> tail;
     /**
-     * Constructor class MyLinkedList; Sets size to 0 and head to null
+     * Constructor class MyLinkedList
      */
     public MyLinkedList()
     {
         head = null;
+        tail = null;
         size = 0;
     }
     
@@ -33,12 +34,14 @@ public class MyLinkedList <E extends Comparable<E>>
     public Node<E> getNode(int index) {
         if(index <= (int)size/2) {
             Node <E> current = head;
+            
             for(int i = 0; i < index; i++) {
                 current = current.getNext();
             }
             return current;
         } else {
             Node <E> current = tail;
+            
             for(int i = size; i > index;i--) {
                 current = current.getPrev();
             }
@@ -64,12 +67,10 @@ public class MyLinkedList <E extends Comparable<E>>
     public E remove(E element) {
         Node<E> current = head;
         int index = 0;
+        
         while(current != null && current.getData().compareTo(element) != 0) {
             current = current.getNext();
             index++;
-        }
-        if(current == null) {
-            return null;
         }
         return remove(index);
     }
@@ -80,7 +81,7 @@ public class MyLinkedList <E extends Comparable<E>>
     public E remove(int index) throws NoSuchElementException {
         if(index < 0 || index >= size) {
             throw new NoSuchElementException();
-        } else if(index == 0) {
+        } else if (index == 0) {
             return removeHead();
         } else {
             Node <E> toRemove = getNode(index);
@@ -92,6 +93,7 @@ public class MyLinkedList <E extends Comparable<E>>
                 toRemove.getPrev().setNext(toRemove.getNext());
                 toRemove.getNext().setPrev(toRemove.getPrev());
             }
+            
             E tempData = toRemove.getData();
             toRemove.setNext(null);
             toRemove.setPrev(null);
@@ -108,23 +110,18 @@ public class MyLinkedList <E extends Comparable<E>>
         if(index < 0 || index >= size) {
             throw new NoSuchElementException();
         } else {
-            Node <E> current = head;
-            Node <E> newnode = new Node(element);
-            
-            for(int i = 0; i < index - 1;i++) {
-                current = current.getNext();
-            }
             if(index == 0 || size == 0) {
                 addHead(element);
             } else if(size == index) {
                 addTail(element);
             } else {
-                Node <E> next = current.getNext();
-                newnode.setNext(next);
-                newnode.setPrev(current);
-                current.setNext(newnode);
-                next.setPrev(newnode);
+                Node<E> newnode = new Node<E>(element);
+                Node<E> next = getNode(index);
                 size++;
+                newnode.setNext(next);
+                newnode.setPrev(next.getPrev());
+                next.setPrev(newnode);
+                newnode.getPrev().setNext(newnode);
             }
         }
     }
@@ -157,6 +154,7 @@ public class MyLinkedList <E extends Comparable<E>>
     public void insertSorted(E element) {
         Node <E> current = head;
         int index = 0;
+        
         while(current != null && current.getData().compareTo(element) < 0) {
             current = current.getNext();
             index++;
@@ -185,16 +183,14 @@ public class MyLinkedList <E extends Comparable<E>>
      * Takes in an element and creates and adds a node to the end
      */
     public void addTail(E data) {
-        size++;
-        Node newnode = new Node(data);
-        
         if(isEmpty()) {
-            tail = newnode;
-            head = tail;
+            addHead(data);
         } else {
-            tail.setNext(newnode);
+            Node <E> newnode = new Node(data);
             newnode.setPrev(tail);
+            tail.setNext(newnode);
             tail = newnode;
+            size++;
         }
     }
 
@@ -245,13 +241,16 @@ public class MyLinkedList <E extends Comparable<E>>
      * Returns the data of the current nodes
      */
     public String toString() {
-        Node current = head;
         String list = "";
+        
         if(isEmpty()) {
             return list;
         }
+        
+        Node<E> current = head;
         list = list + current.getData();
         current = current.getNext();
+        
         while(current != null) {
             list = list + "," + current.getData();
             current = current.getNext();
