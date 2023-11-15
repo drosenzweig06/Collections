@@ -62,14 +62,14 @@ public class BinarySearchTreeNode<E extends Comparable<E>>
     }
     
     public E search(E element) {
-        if(element.compareTo(data) < 0) {
-            if(left == null) {
+        if (element.compareTo(data) < 0) {
+            if (left == null) {
                 return null;
             } else {
                 return left.search(element);
             }
         } else {
-            if(right == null) {
+            if (right == null) {
                 return null;
             } else {
                 return right.search(element);
@@ -77,11 +77,19 @@ public class BinarySearchTreeNode<E extends Comparable<E>>
         }
     }
     
-    // public E getMin() {
+    public E getMin() {
+        if (left == null) {
+            return data;
+        } else {
+            return left.getMin();
+        }
+    }
     
-    // }
-    
-    // public E getMax() {
-        
-    // }
+    public E getMax() {
+        if (right == null) {
+            return data;
+        } else {
+            return right.getMin();
+        }
+    }
 }

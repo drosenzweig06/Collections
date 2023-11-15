@@ -36,7 +36,28 @@ public class BinarySearchTree<E extends Comparable<E>>
         }
     }
     
-    // public E getMin() {
-        
-    // }
+    public E getMin() {
+        if (isEmpty()) {
+            return null;
+        } else {
+            return root.getMin();
+        }
+    }
+    
+    public E getMax() {
+        if (isEmpty()) {
+            return null;
+        } else {
+            return root.getMax();
+        }
+    }
+    
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    
+    public int size() {
+        return size;
+    }
+    
 }
