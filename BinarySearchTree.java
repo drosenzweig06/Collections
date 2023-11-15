@@ -56,7 +56,7 @@ public class BinarySearchTree<E extends Comparable<E>>
         return size == 0;
     }
     
-    public int size() {
+    public int size(){
         return size;
     }
     
