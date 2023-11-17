@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class BinarySearchTreeNode here.
  *
@@ -92,4 +91,32 @@ public class BinarySearchTreeNode<E extends Comparable<E>>
             return right.getMin();
         }
     }
+    
+    public String toString() {
+        String toReturn = "";
+        if (left != null) {
+            toReturn += left.toString() + ", ";
+        } 
+        if (right != null) {
+            toReturn += right.toString() + ", ";
+        }
+        
+        return toReturn;
+    }
+    
+    public int getDepth() {
+        int ldepth = 0;
+        int rdepth = 0;
+        if (!(left == null)) {
+            ldepth = left.getDepth();
+        } 
+        if (!(right == null)) {
+            rdepth = right.getDepth();
+        }
+        return Math.max(ldepth, rdepth) + 1;
+    }
+    
+    // public E remove(E element) {
+        
+    // }
 }

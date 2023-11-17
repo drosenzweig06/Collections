@@ -31,5 +31,7 @@ public class TestBST
         System.out.println(testtree.isEmpty());
         System.out.println(testtree.getMin());
         System.out.println(testtree.size());
+        System.out.println(testtree.getDepth());
+        System.out.println(testtree.toString());
     }
 }
