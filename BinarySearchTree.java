@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class BinarySearchTree here.
  *
@@ -66,5 +65,13 @@ public class BinarySearchTree<E extends Comparable<E>>
     
     public int getDepth() {
         return root.getDepth();
+    }
+    
+    public E removeMin() {
+        return root.removeMin();
+    }
+    
+    public E removeMax() {
+        return root.removeMax();
     }
 }
