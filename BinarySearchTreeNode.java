@@ -133,12 +133,37 @@ public class BinarySearchTreeNode<E extends Comparable<E>>
         }
     }
     
-    public E remove(E element) {
+    public BinarySearchTreeNode<E> remove(E element) {
         if (element.compareTo(data) > 0) {
-            return right.remove(element);
+            if (right == null) {
+                return right;
+            } else {
+                right = right.remove(element);
+                return right;
+            }
+        } else if (element.compareTo(data) < 0) {
+            if (left == null) {
+                return left;
+            } else {
+                left = left.remove(element);
+                return left;
+            }
         } else {
-            return left.remove(element);
-        } 
+            if (left == null && right == null) {
+                data = null;
+                return null;
+            } else if (right == null) {
+                data = null;
+                return left;
+            } else if (left == null) {
+                data = null;
+                return right;
+            } else {
+                data = left.getMax();
+                left.removeMax();
+                return left;
+            }
+        }
     }
     /**     * Prints elements as stored in the tree
      *
@@ -218,15 +243,15 @@ public class BinarySearchTreeNode<E extends Comparable<E>>
 
     // build array of element strings
     private void printTree(String[] elements, int nodeNum, int maxElementWidth) {
-        elements[nodeNum] = element.toString();
+        elements[nodeNum] = elements.toString();
         if (elements[nodeNum].length() > maxElementWidth) {
             elements[nodeNum] = elements[nodeNum].substring(0, maxElementWidth);
         }
-        if (leftTree != null) {
-            leftTree.printTree(elements, (nodeNum + 1) * 2 - 1, maxElementWidth);
+        if (left != null) {
+            left.printTree(elements, (nodeNum + 1) * 2 - 1, maxElementWidth);
         }
-        if (rightTree != null) {
-            rightTree.printTree(elements, (nodeNum + 1) * 2, maxElementWidth);
+        if (right != null) {
+            right.printTree(elements, (nodeNum + 1) * 2, maxElementWidth);
         }
     }
     
