@@ -17,6 +17,9 @@ public class BinarySearchTree<E extends Comparable<E>>
         size = 0;
     }
     
+    /**
+     * Inserts element into BST.
+     */
     public void insert(E element) {
         if (root == null) {
             root = new BinarySearchTreeNode<E>(element);
@@ -27,6 +30,9 @@ public class BinarySearchTree<E extends Comparable<E>>
         }
     }
     
+    /**
+     * Searches for and returns matching element.
+     */
     public E search(E element) {
         if (root == null) {
             return null;
@@ -35,6 +41,9 @@ public class BinarySearchTree<E extends Comparable<E>>
         }
     }
     
+    /**
+     * Returns minimum element in BST.
+     */
     public E getMin() {
         if (isEmpty()) {
             return null;
@@ -43,6 +52,9 @@ public class BinarySearchTree<E extends Comparable<E>>
         }
     }
     
+    /**
+     * Returns maximum element in BST.
+     */
     public E getMax() {
         if (isEmpty()) {
             return null;
@@ -51,27 +63,78 @@ public class BinarySearchTree<E extends Comparable<E>>
         }
     }
     
+    /**
+     * Indicates whether BST is empty.
+     */
     public boolean isEmpty() {
         return size == 0;
     }
     
+    /**
+     * Returns number of elements in BST.
+     */
     public int size(){
         return size;
     }
     
+    /**
+     * Method toString
+     *
+     * @return returns a string that contains all the elements in the BST
+     */
     public String toString() {
         return root.toString();
     }
     
+    /**
+     * Method getDepth
+     *
+     * @return returns the depth of the BST 
+     */
     public int getDepth() {
         return root.getDepth();
     }
     
+    /**
+     * Method removeMin
+     * Removes and returns the minimum element
+     */
     public E removeMin() {
-        return root.removeMin();
+        if (isEmpty()) {
+            return null;
+        } else {
+            E toReturn = root.getMin();
+            root.removeMin();
+            return toReturn;
+        }
     }
     
+    /**
+     * Method removeMax
+     * Removes and returns the maximum element.
+     */
     public E removeMax() {
-        return root.removeMax();
+        if (isEmpty()) {
+            return null;
+        } else {
+            E toReturn = root.getMax();
+            root.removeMax();
+            return toReturn;
+        }
+    }
+    
+    /**
+     * Method remove
+     * Removes and returns matching element.
+     */
+    public E remove(E element) {
+        if (search(element) == null) {
+            return null;
+        } else {
+            E returnSearch = search(element);
+            root = root.remove(element);
+            size--;
+            return returnSearch;
+        }
     }
 }
