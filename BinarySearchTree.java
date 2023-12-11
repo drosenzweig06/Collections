@@ -83,7 +83,11 @@ public class BinarySearchTree<E extends Comparable<E>>
      * @return returns a string that contains all the elements in the BST
      */
     public String toString() {
-        return root.toString();
+        if (root == null) {
+            return "";
+        } else {
+            return root.toString();
+        }
     }
     
     /**
@@ -92,7 +96,11 @@ public class BinarySearchTree<E extends Comparable<E>>
      * @return returns the depth of the BST 
      */
     public int getDepth() {
-        return root.getDepth();
+        if (root == null) {
+            return 0;
+        } else {
+            return root.getDepth();
+        }
     }
     
     /**
