@@ -80,8 +80,8 @@ public class MyHeap<E extends Comparable<E>>
             int parent = (child - 1)/2;
             elemArray[0] = elemArray[lastNode];
             elemArray[lastNode] = null;
-            lastNode--;
             int current = 0;
+            while(current < size() && parent.compareTo(
             
         }
     }
