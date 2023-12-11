@@ -20,32 +20,8 @@ public class BinarySearchTreeNode<E extends Comparable<E>>
         this.data = data;
     }
     
-    public BinarySearchTreeNode<E> getLeft() {
-        return left;
-    }
-    
-    public BinarySearchTreeNode<E> getRight() {
-        return right;
-    }
-    
-    public E getData() {
-        return data;
-    }
-    
-    public void setLeft(BinarySearchTreeNode<E> left) {
-        this.left = left; 
-    }
-    
-    public void setRight(BinarySearchTreeNode<E> right) {
-        this.right = right; 
-    }
-    
-    public void setData(E data) {
-        this.data = data;
-    }
-    
     public void insert(E element) {
-        if (element.compareTo(data) < 0) {
+        if (element.compareTo(data) <= 0) {
             if (left == null) {
                 left = new BinarySearchTreeNode<E>(element);
             } else {
@@ -92,66 +68,91 @@ public class BinarySearchTreeNode<E extends Comparable<E>>
         }
     }
     
-    public String toString() {
-        String toReturn = "";
-        if (left != null) {
-            toReturn += left.toString();
-        } 
-        toReturn += data + ",";
-        if (right != null) {
-            toReturn += right.toString();
-        }
-        
-        return toReturn;
-    }
-    
     public int getDepth() {
         int ldepth = 0;
         int rdepth = 0;
+        
         if (!(left == null)) {
             ldepth = left.getDepth();
         } 
         if (!(right == null)) {
             rdepth = right.getDepth();
         }
+        
         return Math.max(ldepth, rdepth) + 1;
     }
     
-    public E removeMin() {
-        if (left == null) {
-            return data;
+    public BinarySearchTreeNode<E> removeMin() {
+        if (left == null && right == null) {
+            data = null;
+            return null;
+        } else if(left == null) {
+            data = null;
+            return right;
         } else {
-            return left.getMax();
+            left = left.removeMin();
+            return this;
         }
     }
     
-    public E removeMax() {
-        if (right == null) {
-            return data;
+    public BinarySearchTreeNode<E> removeMax() {
+        if (left == null && right == null) {
+            data = null;
+            return null;
+        } else if(right == null) {
+            data = null;
+            return left;
         } else {
-            return right.getMax();
+            right = right.removeMax();
+            return this;
         }
     }
     
     public BinarySearchTreeNode<E> remove(E element) {
-        if (element.compareTo(data) > 0){
-            right = right.remove(element);
-            return this;
-        } else if (element.compareTo(data) < 0){
-            left = left.remove(element);
-            return this;
+        if (element.compareTo(data) > 0) {
+            if (right == null) {
+                return this;
+            } else {
+                right = right.remove(element);
+                return this;
+            }
+        } else if (element.compareTo(data) < 0) {
+            if (left == null) {
+                return this;
+            } else {
+                left = left.remove(element);
+                return this;
+            }
         } else {
             if (left == null && right == null) {
+                data = null;
                 return null;
             } else if (left == null && right != null) {
+                data = null;
                 return right;
             } else if (left != null && right == null) {
+                data = null;
                 return left;
             } else {
                 data = right.getMin();
-                right = new BinarySearchTreeNode<E>(right.removeMin());
+                right = right.removeMin();
                 return this;
             }
         }
+    }
+    
+    public String toString() {
+        String toReturn = "";
+        
+        if (left != null) {
+            toReturn += left.toString() + ", ";
+        } 
+        
+        toReturn += data.toString();
+        
+        if (right != null) {
+            toReturn += ", " + right.toString();
+        }
+        return toReturn;
     }
 }
