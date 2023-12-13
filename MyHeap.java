@@ -70,13 +70,28 @@ public class MyHeap<E extends Comparable<E>>
             return null;
         } else {
             E toReturn = getMin();
-            int child = lastNode;
-            int parent = (child - 1)/2;
             elemArray[0] = elemArray[lastNode];
             elemArray[lastNode] = null;
+            int child = lastNode;
             int current = 0;
-            while(current < size() && parent.compareTo(
+            lastNode--;
             
+            while((current * 2 + 1 < size() //checks the indexs of both the left and the right
+            && elemArray[current].compareTo(elemArray[(current*2) + 1]) > 0)
+            || (current * 2 + 2 < size() && elemArray[current].compareTo(elemArray[(current*2) + 2]) > 0)) {
+                E temp = elemArray[current];
+                
+                if (elemArray[(current*2) + 1].compareTo(elemArray[(current*2) + 1]) <= 0) {
+                    elemArray[current] = elemArray[(current*2) + 1];
+                    elemArray[(current*2) + 1] = temp;
+                    current = (current*2) + 1;
+                } else {
+                    elemArray[current] = elemArray[(current*2) + 2];
+                    elemArray[(current*2) + 2] = temp;
+                    current = (current*2) + 2;
+                }
+            }
+            return toReturn;
         }
     }
     
