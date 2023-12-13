@@ -43,12 +43,14 @@ public class BinarySearchTreeNode<E extends Comparable<E>>
             } else {
                 return left.search(element);
             }
-        } else {
+        } else if(element.compareTo(data) > 0) {
             if (right == null) {
                 return null;
             } else {
                 return right.search(element);
             }
+        } else {
+            return data;
         }
     }
     

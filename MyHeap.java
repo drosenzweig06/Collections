@@ -20,15 +20,15 @@ public class MyHeap<E extends Comparable<E>>
         lastNode = -1;
     }
     
+    /**
+     * Indicates whether heap is empty.
+     */
     public boolean isEmpty() {
         return(lastNode == -1);
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Adds element to heap.
      */
     public void add(E element)
     {
@@ -50,10 +50,7 @@ public class MyHeap<E extends Comparable<E>>
     }
     
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Gets minimum element from heap.
      */
     public E getMin()
     {
@@ -65,10 +62,7 @@ public class MyHeap<E extends Comparable<E>>
     }
     
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     *  Removes and returns minimum element from heap.
      */
     public E removeMin()
     {
@@ -87,10 +81,7 @@ public class MyHeap<E extends Comparable<E>>
     }
     
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Returns number of elements in heap
      */
     public int size()
     {
@@ -98,10 +89,7 @@ public class MyHeap<E extends Comparable<E>>
     }
     
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Returns the contents of the heap for testing purposes.
      */
     public String toString()
     {
