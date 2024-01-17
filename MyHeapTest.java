@@ -20,5 +20,7 @@ public class MyHeapTest
         System.out.println(test.getMin());
         System.out.println(test.size());
         System.out.println(test.toString());
+        test.removeMin();
+        test.removeMin();
     }
 }
