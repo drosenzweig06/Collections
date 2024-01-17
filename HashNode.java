@@ -9,6 +9,7 @@ public class HashNode
 {
     // instance variables - replace the example below with your own
     private String value;
+    private String key;
     private Node next;
 
     /**
@@ -16,7 +17,24 @@ public class HashNode
      */
     public HashNode()
     {
-        
+        this.value = value;
+        this.key = key;
+    }
+    
+    public String getValue() {
+        return value;
+    }
+    
+    public String getKey() {
+        return key;
+    }
+    
+    public void setValue(String a) {
+        value = a;
+    }
+    
+    public void setKey(String a) {
+        key = a;
     }
 
     /**
@@ -25,9 +43,8 @@ public class HashNode
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public int sampleMethod(int y)
+    public String toString()
     {
-        // put your code here
-        return x + y;
+        return (key + "->" + value);
     }
 }

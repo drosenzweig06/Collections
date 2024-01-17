@@ -70,6 +70,10 @@ public class MyHashTable
         return (size == 0);
     }
     
+    public Node searchBucket(int hashValue, String key) {
+        
+    }
+    
     public String toString() {
         return Arrays.toString(array);
     }
