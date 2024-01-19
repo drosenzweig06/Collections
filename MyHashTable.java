@@ -5,11 +5,12 @@ import java.util.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class MyHashTable
+public class MyHashTable<K,V>
 {
     // instance variables - replace the example below with your own
     private int size;
-    private String[] array;
+    private int tableSize;
+    private HashNode<K,V>[] array;
 
     /**
      * Constructor for objects of class MyHashTable
@@ -17,7 +18,8 @@ public class MyHashTable
     public MyHashTable()
     {
         size = 0;
-        array = new String[10];
+        tableSize = 10;
+        array = (HashNode<K,V>[])new HashNode[tableSize];
     }
 
     /**
@@ -26,10 +28,16 @@ public class MyHashTable
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public void put(String key, String value)
+    public void put(K key, V value)
     {
         int index = hash(key);
-        array[index] = value;
+        if(array[index] == null) {
+            array[index] = new HashNode(key, value);
+        } else {
+            HashNode<K,V> head = array[index];
+            array[index] = new HashNode(key,value);
+            array[index].setNext(head);
+        }
         size++;
     }
     
@@ -70,10 +78,6 @@ public class MyHashTable
         return (size == 0);
     }
     
-    public Node searchBucket(int hashValue, String key) {
-        
-    }
-    
     public String toString() {
         return Arrays.toString(array);
     }
@@ -94,3 +98,56 @@ public class MyHashTable
         return product%10;
     }
 }
+class HashNode<K,V>
+{
+    // instance variables - replace the example below with your own
+    private String value;
+    private String key;
+    private HashNode<K,V> next;
+
+    /**
+     * Constructor for objects of class HashNode
+     */
+    public HashNode(String key, String value)
+    {
+        this.value = value;
+        this.key = key;
+    }
+    
+    public String getValue() {
+        return value;
+    }
+    
+    public String getKey() {
+        return key;
+    }
+    
+    public HashNode<K,V> getNext()
+    {
+        return next;
+    }
+    
+    public void setValue(String a) {
+        value = a;
+    }
+    
+    public void setKey(String a) {
+        key = a;
+    }
+    
+    public void setNext(HashNode<K,V> a) {
+        next = a;
+    }
+
+    /**
+     * An example of a method - replace this comment with your own
+     *
+     * @param  y  a sample parameter for a method
+     * @return    the sum of x and y
+     */
+    public String toString()
+    {
+        return (key + "->" + value);
+    }
+}
+
