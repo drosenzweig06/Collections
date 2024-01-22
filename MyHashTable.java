@@ -50,11 +50,7 @@ public class MyHashTable<K,V>
     public V get(K key)
     {
         int index = hash(key);
-        if(array[index] == null) {
-            return null;
-        } else {
-            //return searchBucket(index, key).getValue();
-        }
+        return searchBucket(index, key).getValue();
     }
     
     /**
@@ -65,6 +61,7 @@ public class MyHashTable<K,V>
      */
     public String remove(K key)
     {
+        /*
         int index = hash(key);
         V value = array[index];
         array[index] = null;
@@ -72,20 +69,21 @@ public class MyHashTable<K,V>
             size--;
         }
         return value;
+        */
     }
     
-    private void addToBucket(int index, HashNode node) {
+    private void addToBucket(int index, HashNode<K,V> node) {
         if (array[index] == null) {
             array[index] = node;
         } else {
-            HashNode head = array[index];
+            HashNode<K,V> head = array[index];
             array[index] = node;
             array[index].setNext(head);
         }
     }
     
-    public HashNode searchBucket(int index, K key) {
-        HashNode current = array[index];
+    public HashNode<K,V> searchBucket(int index, K key) {
+        HashNode<K,V> current = array[index];
         
         if (current != null) {
             while (!(current.getKey().equals(key))) {
@@ -99,12 +97,12 @@ public class MyHashTable<K,V>
         return current;
     }
     
-    private void removeFromBucket(int index, HashNode previous) {
+    private void removeFromBucket(int index, HashNode<K,V> previous) {
         if (array[index] == previous) {
             array[index] = array[index].getNext();
             size--;
         } else {
-            HashNode current = array[index];
+            HashNode<K,V> current = array[index];
             
             while (current.getNext() != previous) {
                 current = current.getNext();
@@ -138,6 +136,7 @@ public class MyHashTable<K,V>
         return key.hashCode()%array.length;
     }
 }
+
 class HashNode<K,V>
 {
     // instance variables - replace the example below with your own
@@ -175,7 +174,7 @@ class HashNode<K,V>
         key = a;
     }
     
-    public void setNext(HashNode a) {
+    public void setNext(HashNode<K,V> a) {
         next = a;
     }
 

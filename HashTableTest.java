@@ -15,7 +15,7 @@ public class HashTableTest
      */
     public static void sampleMethod()
     {
-        MyHashTable a = new MyHashTable();
+        MyHashTable<String> a = new MyHashTable();
         a.put("b", "bruh");
         a.put("a", "apple");
         System.out.println(a.get("a"));
@@ -25,5 +25,10 @@ public class HashTableTest
         a.put("c", "cat");
         System.out.println(a.isEmpty());
         System.out.println(a.toString());
+        a.put("A", "a");        
+        a.put("K", "k");
+        System.out.print(a.toString().equals(
+        "[null, null, null, null, null, K->k|A->a, null, null, null, null]"
+        ) + " ");
     }
 }
