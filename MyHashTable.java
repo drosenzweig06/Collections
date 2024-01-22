@@ -47,10 +47,14 @@ public class MyHashTable<K,V>
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public String get(String key)
+    public V get(K key)
     {
         int index = hash(key);
-        return array[index];
+        if(array[index] == null) {
+            return null;
+        } else {
+            //return searchBucket(index, key).getValue();
+        }
     }
     
     /**
@@ -59,15 +63,57 @@ public class MyHashTable<K,V>
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public String remove(String key)
+    public String remove(K key)
     {
         int index = hash(key);
-        String value = array[index];
+        V value = array[index];
         array[index] = null;
         if(value != null) {
             size--;
         }
         return value;
+    }
+    
+    private void addToBucket(int index, HashNode node) {
+        if (array[index] == null) {
+            array[index] = node;
+        } else {
+            HashNode head = array[index];
+            array[index] = node;
+            array[index].setNext(head);
+        }
+    }
+    
+    public HashNode searchBucket(int index, K key) {
+        HashNode current = array[index];
+        
+        if (current != null) {
+            while (!(current.getKey().equals(key))) {
+                if (current.getNext() == null) {
+                    return null;
+                } else {
+                    current = current.getNext();
+                }
+            }
+        }
+        return current;
+    }
+    
+    private void removeFromBucket(int index, HashNode previous) {
+        if (array[index] == previous) {
+            array[index] = array[index].getNext();
+            size--;
+        } else {
+            HashNode current = array[index];
+            
+            while (current.getNext() != previous) {
+                current = current.getNext();
+            }
+            if (current.getNext() == previous) {
+                 current.setNext(previous.getNext()); 
+                 size--;
+            }
+        }
     }
     
     public int size() {
@@ -88,37 +134,31 @@ public class MyHashTable<K,V>
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    private int hash(String key) {
-        int product = 1;
-        
-        for(int i = 0; i < key.length(); i++) {
-            product = product * key.charAt(i);
-        }
-        product = Math.abs(product);
-        return product%10;
+    private int hash(K key) {
+        return key.hashCode()%array.length;
     }
 }
 class HashNode<K,V>
 {
     // instance variables - replace the example below with your own
-    private String value;
-    private String key;
-    private HashNode<K,V> next;
+    private V value;
+    private K key;
+    private HashNode next;
 
     /**
      * Constructor for objects of class HashNode
      */
-    public HashNode(String key, String value)
+    public HashNode(K key, V value)
     {
         this.value = value;
         this.key = key;
     }
     
-    public String getValue() {
+    public V getValue() {
         return value;
     }
     
-    public String getKey() {
+    public K getKey() {
         return key;
     }
     
@@ -127,15 +167,15 @@ class HashNode<K,V>
         return next;
     }
     
-    public void setValue(String a) {
+    public void setValue(V a) {
         value = a;
     }
     
-    public void setKey(String a) {
+    public void setKey(K a) {
         key = a;
     }
     
-    public void setNext(HashNode<K,V> a) {
+    public void setNext(HashNode a) {
         next = a;
     }
 
