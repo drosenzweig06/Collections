@@ -15,7 +15,7 @@ public class HashTableTest
      */
     public static void sampleMethod()
     {
-        MyHashTable<String> a = new MyHashTable();
+        MyHashTable a = new MyHashTable();
         a.put("b", "bruh");
         a.put("a", "apple");
         System.out.println(a.get("a"));

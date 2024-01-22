@@ -26,7 +26,7 @@ public class MyHashTable<K,V>
      * An example of a method - replace this comment with your own
      *
      * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * @return    returns void
      */
     public void put(K key, V value)
     {
@@ -59,17 +59,16 @@ public class MyHashTable<K,V>
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public String remove(K key)
+    public V remove(K key)
     {
-        /*
         int index = hash(key);
-        V value = array[index];
-        array[index] = null;
-        if(value != null) {
-            size--;
+        HashNode<K,V> previous = searchBucket(index,key);
+        if (previous == null) {
+            return null;
+        } else {
+            removeFromBucket(index, previous);
+            return previous.getValue();
         }
-        return value;
-        */
     }
     
     private void addToBucket(int index, HashNode<K,V> node) {
@@ -186,7 +185,14 @@ class HashNode<K,V>
      */
     public String toString()
     {
-        return (key + "->" + value);
+        String toReturn = key + "->" + value;
+        HashNode<K,V> current = this;
+        
+        while (current.getNext() != null) {
+            current = current.getNext();
+            toReturn += "|" + current.getKey() + "->" + current.getValue();
+        }
+        return toReturn;
     }
 }
 
