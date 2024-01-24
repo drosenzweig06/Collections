@@ -31,14 +31,17 @@ public class MyHashTable<K,V>
     public void put(K key, V value)
     {
         int index = hash(key);
-        if(array[index] == null) {
-            array[index] = new HashNode(key, value);
+        HashNode<K,V> node = new HashNode<K,V>(key, value);
+        if (searchBucket(index, key) == null) {
+            addToBucket(index, node);
+            size++;
+            if (size > loadFactor*tableSize) {
+                this.expandHashTable();
+            }
         } else {
-            HashNode<K,V> head = array[index];
-            array[index] = new HashNode(key,value);
-            array[index].setNext(head);
+            searchBucket(index, key).setValue(value);
         }
-        size++;
+        
     }
     
     /**
@@ -50,7 +53,11 @@ public class MyHashTable<K,V>
     public V get(K key)
     {
         int index = hash(key);
-        return searchBucket(index, key).getValue();
+        if (array[index] == null) {
+            return null;
+        } else {
+            return searchBucket(index, key).getValue();
+        }
     }
     
     /**
@@ -152,7 +159,7 @@ public class MyHashTable<K,V>
                 
                 while (current != null) {
                     nextHashNode = current.getNext();
-                    int hashIndex = current.getHashValue() % tableSize;
+                    int hashIndex = current.getHashValue()%tableSize;
                     if (array[hashIndex] == null) {
                         array[hashIndex] = current;
                         current.setNext(null);
