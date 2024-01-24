@@ -16,15 +16,6 @@ public class HashTableTest
     public static void sampleMethod()
     {
         MyHashTable a = new MyHashTable();
-        a.put("b", "bruh");
-        a.put("a", "apple");
-        System.out.println(a.get("a"));
-        System.out.println(a.remove("b"));
-        System.out.println(a.remove("b"));
-        System.out.println(a.size());
-        a.put("c", "cat");
-        System.out.println(a.isEmpty());
-        System.out.println(a.toString());
         a.put("A", "a");        
         a.put("K", "k");
         System.out.print(a.toString().equals(

@@ -2,15 +2,15 @@ import java.util.*;
 /**
  * Write a description of class MyHashTable here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Daniel
+ * @version Jan 24, 2024
  */
 public class MyHashTable<K,V>
 {
-    // instance variables - replace the example below with your own
     private int size;
     private int tableSize;
-    private HashNode<K,V>[] array;
+    private HashNode<K,V>[] array; 
+    private double loadFactor = 0.7; 
 
     /**
      * Constructor for objects of class MyHashTable
@@ -23,10 +23,10 @@ public class MyHashTable<K,V>
     }
 
     /**
-     * An example of a method - replace this comment with your own
+     * Places a value in corresponding hash index
      *
-     * @param  y  a sample parameter for a method
-     * @return    returns void
+     * @param key holds the index to the correlating value and value represents
+     * the data at that index
      */
     public void put(K key, V value)
     {
@@ -42,10 +42,10 @@ public class MyHashTable<K,V>
     }
     
     /**
-     * An example of a method - replace this comment with your own
+     * returns the data at the index of the key
      *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * @param  the index of the corresponding value
+     * @return  the value at the index of the key in the hash table/array
      */
     public V get(K key)
     {
@@ -54,10 +54,11 @@ public class MyHashTable<K,V>
     }
     
     /**
-     * An example of a method - replace this comment with your own
+     * removes the Hashnode and the index of the key
      *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * @param  key/index of the node that will get removed
+     * @return  returns the value at the index of the key in the hash table 
+     * that is getting removed
      */
     public V remove(K key)
     {
@@ -81,7 +82,7 @@ public class MyHashTable<K,V>
         }
     }
     
-    public HashNode<K,V> searchBucket(int index, K key) {
+    private HashNode<K,V> searchBucket(int index, K key) {
         HashNode<K,V> current = array[index];
         
         if (current != null) {
@@ -113,26 +114,56 @@ public class MyHashTable<K,V>
         }
     }
     
+    /**
+     * Method size
+     *
+     * @return returns the size or the hash table
+    */
     public int size() {
         return size;
     }
     
+    /**
+     * @return returns whether or not the hash table is empty
+     */
     public boolean isEmpty() {
         return (size == 0);
     }
     
+    /**
+     * @return Returns the array/hash table
+     */
     public String toString() {
         return Arrays.toString(array);
     }
     
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
     private int hash(K key) {
         return key.hashCode()%array.length;
+    }
+    
+    private void expandHashTable() {
+        HashNode<K,V>[] prevArray = array;
+        array = (HashNode<K,V>[]) new HashNode[tableSize * 2];
+        tableSize = tableSize * 2; 
+        for (int i = 0; i < prevArray.length; i++) { 
+            if (prevArray[i] != null) {
+                HashNode<K,V> current = prevArray[i];
+                HashNode<K, V> nextHashNode = current.getNext();
+                
+                while (current != null) {
+                    nextHashNode = current.getNext();
+                    int hashIndex = current.getHashValue() % tableSize;
+                    if (array[hashIndex] == null) {
+                        array[hashIndex] = current;
+                        current.setNext(null);
+                    } else {
+                        current.setNext(array[hashIndex]);
+                        array[hashIndex] = current;
+                    }
+                    current = nextHashNode;
+                }
+            }
+        }
     }
 }
 
@@ -142,6 +173,7 @@ class HashNode<K,V>
     private V value;
     private K key;
     private HashNode next;
+    private int hashValue;
 
     /**
      * Constructor for objects of class HashNode
@@ -150,6 +182,7 @@ class HashNode<K,V>
     {
         this.value = value;
         this.key = key;
+        this.hashValue = key.hashCode();
     }
     
     public V getValue() {
@@ -163,6 +196,10 @@ class HashNode<K,V>
     public HashNode<K,V> getNext()
     {
         return next;
+    }
+    
+    public int getHashValue(){
+        return hashValue;
     }
     
     public void setValue(V a) {
