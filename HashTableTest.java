@@ -22,4 +22,8 @@ public class HashTableTest
         "[null, null, null, null, null, K->k|A->a, null, null, null, null]"
         ) + " ");
     }
+    
+    public static boolean isSubset(int[] arr1, int[] arr2) {
+        if(arr1.length > arr2.length()
+    }
 }
