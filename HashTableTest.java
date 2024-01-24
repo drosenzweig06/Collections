@@ -24,6 +24,32 @@ public class HashTableTest
     }
     
     public static boolean isSubset(int[] arr1, int[] arr2) {
-        if(arr1.length > arr2.length()
+        MyHashTable a = new MyHashTable();
+        boolean toReturn;
+        int[] superset;
+        int[] subset;
+        if (arr1.length > arr2.length) {
+            superset = arr1;
+            subset = arr2;
+        } else {
+            superset = arr2;
+            subset = arr1;
+        }
+        for (int i = 0; i < superset.length; i++) {
+            a.put(i, i);
+        }
+        for (int j = 0; j < subset.length; j++) {
+            if (a.get(j,j) == null) {
+                toReturn = false;
+            } else {
+                toReturn = true;
+            }
+        }
+        return toReturn;
+    }
+    
+    public static boolean containsDuplicate(int[] arr1) {
+        
     }
 }
+
