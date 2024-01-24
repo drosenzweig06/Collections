@@ -23,11 +23,11 @@ public class HashTableTest
         ) + " ");
     }
     
-    public static boolean isSubset(int[] arr1, int[] arr2) {
-        MyHashTable a = new MyHashTable();
+    public static boolean isSubset(Integer[] arr1, Integer[] arr2) {
+        MyHashTable<Integer, Integer> a = new MyHashTable();
         boolean toReturn;
-        int[] superset;
-        int[] subset;
+        Integer[] superset;
+        Integer[] subset;
         if (arr1.length > arr2.length) {
             superset = arr1;
             subset = arr2;
