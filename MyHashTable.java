@@ -145,7 +145,7 @@ public class MyHashTable<K,V>
     }
     
     private int hash(K key) {
-        return key.hashCode()%array.length;
+        return Math.abs(key.hashCode()%array.length);
     }
     
     private void expandHashTable() {
@@ -159,7 +159,7 @@ public class MyHashTable<K,V>
                 
                 while (current != null) {
                     nextHashNode = current.getNext();
-                    int hashIndex = current.getHashValue()%newTableSize;
+                    int hashIndex = Math.abs(current.getHashValue()%newTableSize);
                     if (array[hashIndex] == null) {
                         array[hashIndex] = current;
                         current.setNext(null);
