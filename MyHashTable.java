@@ -37,7 +37,7 @@ public class MyHashTable<K,V>
             size++;
             if (size > loadFactor*tableSize) {
                 this.expandHashTable();
-            }
+        }
         } else {
             searchBucket(index, key).setValue(value);
         }
